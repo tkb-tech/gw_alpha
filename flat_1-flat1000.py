@@ -2084,6 +2084,7 @@ samples = [ [47.79768699797969, 31.73497618262042, 106.48578708110146]
            ,
            [24.266628446005956, 29.50522371760446, 56.36315071135078]]
 
+redshift_list = []
 
 for i in range(0,s_s):
     if samples[i][0] > samples[i][1]:
@@ -2091,13 +2092,15 @@ for i in range(0,s_s):
         second = samples[i][1]
         samples[i][0] = second
         samples[i][1] = first
+    redshift_list.append(samples[i][2])
+
+z_max = max(redshift_list)
+
+print("max redshhift is ",z_max,".")
 
 mean_redshift = np.mean(samples, axis=0)
 print "mean\n", np.mean(samples, axis=0)
 print "covariance\n", np.cov(samples, rowvar=False)
-
-
-print samples[10][1]
 
 # samples are created!
 
@@ -2110,7 +2113,7 @@ def E(x):
     return result
 
 
-#describe comoving distance from redshhift x.
+#describe comoving distance from redshift x.
 def D_c(x):
     
     def g(y):
@@ -2205,7 +2208,7 @@ for tkb in range(0,i_a):
     v = np.zeros((grid,grid))
     N = 100000
     z_i = 0.1
-    z_f = 1.5
+    z_f = z_max + 0.1
     dz = z_f - z_i
 
     for i in range(0,grid):
