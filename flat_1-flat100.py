@@ -22,10 +22,11 @@ o_k = 0.0
 o_l = 0.7
 #_alpha_ = 36.0/37.0
 _alpha_ = 1.
-s_s = 1000
-grid = 5
+s_s = 100
+grid = 3
 #m = [0.1,21.0,30.0,40.0,52.0,150.]
-m = [5.0,26.,32.,40.,45.,50.]
+m = [5.0, 34.0, 43.0, 50.0]
+#m = [5.0,31.,41.,50.]
 i_a = 1
 
 def poisson(n,v):
@@ -2088,7 +2089,6 @@ samples = [ [47.79768699797969, 31.73497618262042, 106.48578708110146]
 
 redshift_list = []
 
-
 for i in range(0,s_s):
     if samples[i][0] > samples[i][1]:
         first = samples[i][0]
@@ -2101,6 +2101,7 @@ z_max = 0.01 * max(redshift_list)
 z_min = 0.01 * min(redshift_list)
 
 print("max redshhift is ",z_max,".")
+print("min redshhift is ",z_min,".")
 
 mean_redshift = np.mean(samples, axis=0)
 print "mean\n", np.mean(samples, axis=0)
@@ -2165,7 +2166,7 @@ def t_c(z):
 sigma = 0.6
 m_c = 20.0 #unit is solar mass.
 Const_in_R_th = 1.0
-"""
+
 def f(m):
     return ( 1/ ( np.sqrt(2.0*np.pi) * sigma * m ) ) * math.exp( -( math.log(m/m_c) )**2.0 / ( 2.0 * sigma**2.0 ) )
 
@@ -2175,7 +2176,7 @@ def f(m):
         return 1.0
     else:
         return 0.0
-
+"""
 
 def h(m):
     return m**(3.0/37.0) * f(m)
