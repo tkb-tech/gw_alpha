@@ -1,3 +1,9 @@
+print('please input the value of alpha...')
+
+inpt = input()
+
+print('Thanks. The value is',inpt)
+
 import gwdet
 import numpy as np
 import scipy
@@ -181,12 +187,18 @@ samples = [ [ 90.85046241 , 80.47555143 , 67.30139741],
      [ 61.12308118 , 21.91134655 , 19.19825399],
      [ 22.20698363 , 78.62613243 , 53.16239133] ]
 
+redshift_list = []
+
 for i in range(0,s_s):
     if samples[i][0] > samples[i][1]:
         first = samples[i][0]
         second = samples[i][1]
         samples[i][0] = second
         samples[i][1] = first
+    redshift_list.append(samples[i][2])
+
+z_max = 0.01 * max(redshift_list)
+z_min = 0.01 * min(redshift_list)
 
 print samples
 mean_redshift = np.mean(samples, axis=0)
@@ -194,8 +206,6 @@ print "mean\n", mean_redshift
 print "covariance\n", np.cov(samples, rowvar=False)
 
 
-
-print samples[10][1]
 
 # samples are created!
 
@@ -280,14 +290,16 @@ probability_multinomial = []
 
 for tkb in range(0,i_a):
 
-    _alpha_ = 36.0/37.0 * (1.0 + tkb) * (-2.5)
+    _alpha_ = (1.0 + tkb) * inpt
 
     def R_th( m_1 ,m_2 ,z):
         return Const_in_R_th * t_c(z)**(-34.0/37.0) *( m_1 + m_2 )**( _alpha_ ) * h( m_1 ) * h( m_2 )
     
     #p_det is completed!
 
-    p = gwdet.detectability()
+#    p = gwdet.detectability()
+    def p(m1,m2,z):
+        return 1.0
 
     def dR_det( m_1 ,m_2 ,z ):
         if m_1 < 0.0:
@@ -305,11 +317,7 @@ for tkb in range(0,i_a):
     z_i = 0.00
     z_f = 2.0
     dz = z_f - z_i
-    n1 = 30
 
-    n2 = 30
-
-    n3 = 100
 
     for i in range(0,grid):
         for j in range(0,grid):
