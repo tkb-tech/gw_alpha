@@ -136,11 +136,24 @@ def dR_det( m_1 ,m_2 ,z ):
         return 1 / ( 1 + z ) * dVdz(z) * p * R_th( m_1 ,m_2 , z )
 #return 1 / ( 1 + z ) * 1 * p( m_1 ,m_2 ,z ) * R_th( m_1 ,m_2 , z )
 
+R_list = np.array([])
+z_list = np.array([])
 
-for i in range(100):
-    m_tkb = 30.
-    z = 0.1* i
-     dR_det( m_tkb, m_tkb, z )
+for i in range(0,100):
+    z = i * 0.2
+    R_list = np.append( R_list, dR_det(30.,30.,z) )
+    z_list = np.append( z_list, z )
+    
+    
+
+
+plt.scatter(z_list,R_list)
+plt.ylabel("R_det,p = 1")
+plt.xlabel("z")
+plt.grid(True)
+plt.show()
+
+"""
 
 class Metropolis(object):
     
@@ -226,4 +239,4 @@ plt.show()
             
 #print ' denominator is ... '
 #print 149 * 149 * 1.49 * sum / N
-
+"""
