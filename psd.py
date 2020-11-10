@@ -28,7 +28,8 @@ defaults={  'directory' : os.path.dirname(__file__),
             'mc1d' : int(200)}
 """
 
-name = 'aLIGOZeroDetHighPower'
+#name = 'aLIGOZeroDetHighPower'
+name = 'aLIGOLateHighSensitivityP1200087'
 
 delta_f = 1./30.
 
@@ -54,7 +55,9 @@ plt.show()
 """
 
 
-name = 'aLIGOEarlyHighSensitivityP1200087'
+#name = 'aLIGOEarlyHighSensitivityP1200087'
+name = 'aLIGOMidHighSensitivityP1200087'
+
 
 delta_f = 1./40.
 
@@ -76,5 +79,7 @@ plt.plot(x2,y2)
 plt.xlim(5.,10**(4))
 plt.yscale('log')
 plt.xscale('log')
+plt.grid(which='major',color='black',linestyle='-')
+plt.grid(which='minor',color='black',linestyle='-')
 plt.show()
 

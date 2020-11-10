@@ -75,11 +75,23 @@ def t_c(z):
 
 
 #describe about mass function
+"""
 sigma = 0.6
 m_c = 20.0 #unit is solar mass.
 
 def f(m):
     return ( 1/ ( np.sqrt(2.0*np.pi) * sigma * m ) ) * math.exp( -( math.log(m/m_c) )**2.0 / ( 2.0 * sigma**2.0 ) )
+"""
+
+m_max = 50.
+m_min = 5.
+
+def f(m):
+    if m_min < m and m < m_max:
+        return 1.0
+    else:
+        return 0.0
+
 
 def h(m):
     return m**(3.0/37.0) * f(m)
@@ -131,7 +143,7 @@ def dR_det( m_1 ,m_2 ,z ):
         return 0.0
     else:
         return 1 / ( 1 + z ) * dVdz(z) * p( m_1 ,m_2 ,z ) * R_th( m_1 ,m_2 , z )
-#return 1 / ( 1 + z ) * 1 * p( m_1 ,m_2 ,z ) * R_th( m_1 ,m_2 , z )
+
 
 class Metropolis(object):
     
@@ -142,7 +154,7 @@ class Metropolis(object):
         self.sample_rate = sample_rate
     
     def __call__(self, sample_size):
-        x = np.full(self.ndim ,100.0)
+        x = np.full(self.ndim ,30.0)
         samples = []
         for i in xrange(sample_size * self.sample_rate):
             x_new = np.random.normal(scale=self.proposal_std, size=self.ndim)
